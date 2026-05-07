@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block css_adicional %}
+<link rel="stylesheet" href="{{ url_for('static',filename = 'src/css/cadastro_login.css') }}">
+{% endblock %}
+
+
+{% block conteudo %}
+<section class="cadastro-login">
+
+    <div class="formulario-container">
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-user">Usuário</label>
+                <input type="text" id="login-user" placeholder="Seu usuário" required>
+            </div>
+            <div class="form-group">
+                <label for="login-pass">Senha</label>
+                <input type="password" id="login-pass" placeholder="********" required>
+            </div>
+            <button type="submit">ENTRAR NO CLUBE</button>
+            <div class="toggle-link">
+                Não tem conta? <a href="#" onclick="toggleForm()">Cadastre-se aqui</a>
+            </div>
+        </form>
+
+        <form action="/cadastrar_usuario" method="POST" id="register-form" class="hidden">
+            <div class="form-group">
+                <label for="reg-name">Nome Completo</label>
+                <input type="text" id="reg-name" name="nome" placeholder="Como quer ser chamado?" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-user">Usuário</label>
+                <input type="text" id="reg-user" name="usuario" placeholder="Crie um usuário" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-pass">Senha</label>
+                <input type="password" id="reg-pass" name="senha" placeholder="Crie uma senha forte" required>
+            </div>
+            <button type="submit">CRIAR MINHA CONTA</button>
+            <div class="toggle-link">
+                Já é de casa? <a href="#" onclick="toggleForm()">Fazer Login</a>
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+    function toggleForm() {
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const title = document.getElementById('form-title');
+
+        if (loginForm.classList.contains('hidden')) {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            title.innerText = 'Faça seu Login';
+        } else {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            title.innerText = 'Crie sua Conta';
+        }
+    }
+
+
+</script>
+
+{% endblock %}

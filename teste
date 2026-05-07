@@ -1,0 +1,25 @@
+async function adicionarAoCarrinho(produtoId, quantidade = 1) {
+  try {
+    const resposta = await fetch("/api/carrinho", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        produto_id: produtoId,
+        quantidade: quantidade
+      })
+    });
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      console.error(dados.message);
+      return;
+    }
+
+    console.log("Sucesso:", dados.message);
+  } catch (erro) {
+    console.error("Erro na requisição:", erro);
+  }
+}
